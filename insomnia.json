@@ -1,0 +1,573 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-06-05T11:45:35.095Z",
+	"__export_source": "insomnia.desktop.app:v5.16.6",
+	"resources": [
+		{
+			"_id": "wrk_322487156f154db4b4a792ff0aa00021",
+			"created": 1516032989892,
+			"description": "",
+			"modified": 1516032989892,
+			"name": "MappingTool",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_b8a2f0f089604264837689b5351e2fff",
+			"color": null,
+			"created": 1516032992065,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1527152319200,
+			"name": "New Environment",
+			"parentId": "wrk_322487156f154db4b4a792ff0aa00021",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_ba6d53853ad040768ceac5ba4d67b113",
+			"cookies": [],
+			"created": 1516032992092,
+			"modified": 1516032992092,
+			"name": "Default Jar",
+			"parentId": "wrk_322487156f154db4b4a792ff0aa00021",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
+			"created": 1520870415597,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520870415598,
+			"modified": 1520870415597,
+			"name": "Wsdl imports",
+			"parentId": "wrk_322487156f154db4b4a792ff0aa00021",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"created": 1520870957469,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520870957469,
+			"modified": 1520870957469,
+			"name": "Services",
+			"parentId": "wrk_322487156f154db4b4a792ff0aa00021",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_56a5b9bdb4bf40ad8e1e65b20b64e2ee",
+			"created": 1520957867705,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520957867705,
+			"modified": 1522327478972,
+			"name": "Service Mapping",
+			"parentId": "wrk_322487156f154db4b4a792ff0aa00021",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_891c6d1a236543ccaccd9c36c8038e54",
+			"created": 1525091844037,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1525091844037,
+			"modified": 1525091844037,
+			"name": "Dependencies",
+			"parentId": "wrk_322487156f154db4b4a792ff0aa00021",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_896b2444366b43fbb9550ff0714604ee",
+			"color": null,
+			"created": 1520869626650,
+			"data": {
+				"apiRoute": "http://localhost:3002/api/"
+			},
+			"isPrivate": false,
+			"modified": 1527152336742,
+			"name": "Test",
+			"parentId": "env_b8a2f0f089604264837689b5351e2fff",
+			"_type": "environment"
+		},
+		{
+			"_id": "req_7548a89f9601496ba4f524cd292e9c78",
+			"authentication": {},
+			"body": {},
+			"created": 1520869375090,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9a332fc6779c4c9ab00c0b90def51c03",
+					"name": "",
+					"value": ""
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1520870415748,
+			"method": "GET",
+			"modified": 1521734213853,
+			"name": "Get wsdl imports",
+			"parameters": [
+				{
+					"id": "pair_f2892549d633448893f793d7c27c8caa",
+					"name": "pageNumber",
+					"value": "1"
+				},
+				{
+					"id": "pair_590c432346d14da789348024ad515763",
+					"name": "pageSize",
+					"value": "30"
+				},
+				{
+					"disabled": true,
+					"id": "pair_0843dcb8a450462cb2da3e84611766a8",
+					"name": "name",
+					"value": "WS_MW_BranchService_v02_02"
+				}
+			],
+			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/wsdl-imports",
+			"_type": "request"
+		},
+		{
+			"_id": "req_dceed09b720f45798c801fb60fa7c173",
+			"authentication": {},
+			"body": {},
+			"created": 1520869860353,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1520870415698,
+			"method": "GET",
+			"modified": 1524061115369,
+			"name": "Get wsdl import detail",
+			"parameters": [],
+			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/wsdl-imports/5ad7538c14ce782828991249",
+			"_type": "request"
+		},
+		{
+			"_id": "req_967ac930192f444c83fe3da38b83ebe5",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"wsldId\": \"ajdkajsdkaskk\",\n  \"createDate\": \"06\",\n  \"wsdlServiceName\": \"MW_PensionService_v02\",\n  \"sourceLink\": \"https://abc.cz/static/666\",\n  \"version\": 1,\n  \"operations\": [\n    {\n      \"operationId\": \"djajkdkjajk\",\n      \"operationName\": \"calculateSupplementaryPensionSavings\",\n      \"serviceDefinition\": true\n    },\n    {\n      \"operationId\": \"djajkdkjajk\",\n      \"operationName\": \"calculateSupplementaryPensionSavings\",\n      \"serviceDefinition\": true\n    }\n  ]\n}"
+			},
+			"created": 1520870343212,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a2165b5305074bce9f8573a6e2e5f66c",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1520870415648,
+			"method": "PUT",
+			"modified": 1520870429329,
+			"name": "Update wsdl import",
+			"parameters": [],
+			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/wsdl-imports/666",
+			"_type": "request"
+		},
+		{
+			"_id": "req_7e93d14ae36d447b8ebca9381f1ed42a",
+			"authentication": {},
+			"body": {},
+			"created": 1520870566371,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1520870566371,
+			"method": "GET",
+			"modified": 1523865476833,
+			"name": "Get transformed wsdl operation",
+			"parameters": [],
+			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/wsdl-imports/5aabac0b148af603485b06ea/operations/5aabac0d148af603485b06ed/transformed",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b508eb91f74144679f5fca9b301c893a",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"createDate\": \"06\",\n  \"wsdlServiceName\": \"WS_MW_AccountTransaction_v02_05\",\n  \"sourceLink\": \"services/WWS_MW_AccountTransaction_v02_05/structured/WS_MW_AccountTransaction_v02_05.wsdl\",\n  \"version\": 1\n}"
+			},
+			"created": 1520870809236,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_5ea68f299dc04b58b398657838476434",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1520870809237,
+			"method": "POST",
+			"modified": 1524061394844,
+			"name": "Add new wsdl import",
+			"parameters": [],
+			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/wsdl-imports/",
+			"_type": "request"
+		},
+		{
+			"_id": "req_aa0e78ae5f3c46139f3631d59bb2e26e",
+			"authentication": {},
+			"body": {},
+			"created": 1520957879724,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1520957879724,
+			"method": "GET",
+			"modified": 1523863289091,
+			"name": "Get services",
+			"parameters": [
+				{
+					"disabled": true,
+					"id": "pair_9d41ba23cb034bdfab8b9f281329ad5a",
+					"name": "name",
+					"value": "opr"
+				},
+				{
+					"disabled": false,
+					"id": "pair_080a47db4d0f44b8aa37acbe7f53a75a",
+					"name": "pageNumber",
+					"value": "1"
+				},
+				{
+					"disabled": false,
+					"id": "pair_314a006a51d14b50a09e794e84f51955",
+					"name": "pageSize",
+					"value": "10"
+				}
+			],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5fc4b79ab8ed494aa0b89f78f4438e68",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"serviceName\": \"WS_MW_BranchService_v02_02.notifyBranchOutageAsync\",\n\t\"userDefined\": false,\n\t\"serviceType\": \"SOAP\",\n\t\"properties\": [\n\t\t{\n\t\t\t\"propertyName\": \"branchBuilding\",\n\t\t\t\"path\": \"notifyBranchOutageRequest\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"branchBuildingId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": \"Id obchodniho mista\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outage\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"dateFrom\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"dateTime\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"dateTo\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"dateTime\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"internalNote\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"operationType\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"publicNoteCs\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"publicNoteEn\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"temporaryBranchId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDays\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"array\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDay\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"afternoonEnd\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"afternoonStart\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"morningEnd\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"morningStart\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDate\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"date\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDayId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageType\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t}\n\t]\n}"
+			},
+			"created": 1520959631287,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b0ea50836e5e478783ab35ec775a984b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1520959631287,
+			"method": "POST",
+			"modified": 1523863243489,
+			"name": "Create service",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6b03c39b6c5e4fe9a4f0c244c76611de",
+			"authentication": {},
+			"body": {},
+			"created": 1521207465632,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1521207465632,
+			"method": "GET",
+			"modified": 1523278674753,
+			"name": "Get service detail",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5acb6320146f2f27c042ce2e/",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a8ee09ab10b544a98796f2a94eb53f66",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\t\t\"_id\": \"5aaa9c1257141922b493737c\",\n\t\t\t\"active\": true,\n\t\t\t\"lastModifiedAt\": \"2018-03-15T16:15:14.956Z\",\n\t\t\t\"createdAt\": \"2018-03-15T16:15:14.956Z\",\n\t\t\t\"serviceName\": \"WS_MW_AccountTransaction_v02_05_666\",\n\t\t\t\"userDefined\": false,\n\t\t\t\"serviceType\": \"SOAP\",\n\t\t\t\"__v\": 0,\n\t\t\t\"properties\": [\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"account\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937395\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"filter\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937394\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"endDate\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest.filter\",\n\t\t\t\t\t\"propertyType\": \"date\",\n\t\t\t\t\t\"description\": \"datum konce\",\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937393\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"startDate\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest.filter\",\n\t\t\t\t\t\"propertyType\": \"date\",\n\t\t\t\t\t\"description\": \"datum zacatku\",\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937392\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"paging\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937391\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"pageNumber\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest.paging\",\n\t\t\t\t\t\"propertyType\": \"int\",\n\t\t\t\t\t\"description\": \"Page to be displayed. Calculated using pageSize. The first page's number is 0.\",\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937390\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"pageReference\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest.paging\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Nektere systemy (napr. SPZ) vraci pri strankovani toto cislo, ktere je nutne zadat do response v pripade dotazu na dalsi stranku. Implementacni logika by mela vzdy, pokud system vrati tuto referenci, ji v dalsim volani dat do response bez ohledu na volany BE system.\",\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493738f\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"pageSize\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsRequest.paging\",\n\t\t\t\t\t\"propertyType\": \"int\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"request\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493738e\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"payments\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse\",\n\t\t\t\t\t\"propertyType\": \"array\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493738d\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"payment\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493738c\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"creditAccount\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493738b\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"accountName\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment.creditAccount\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493738a\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"debitAccount\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937389\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"accountName\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment.debitAccount\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937388\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"amount\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\t\t\"description\": \"Castka nebo limit\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937387\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"currency\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Mina\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937386\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"dueDate\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"date\",\n\t\t\t\t\t\"description\": \"Datum splatnosti\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937385\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"recipientNote\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Sprava pro poijemce.\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937384\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"ks\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Konstantni symbol\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937383\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"ss\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Specificky symbol\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937382\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"vs\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Variabilni symbol\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937381\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"standingOrderName\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Informace uctu (zpravu rozdelit v pripade potreby na max 4 casti po 35 symbolech)\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b4937380\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"orderNumber\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"long\",\n\t\t\t\t\t\"description\": \"Identifikace (cislo) trvaleho prikazu\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493737f\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"orderType\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse.payments.payment\",\n\t\t\t\t\t\"propertyType\": \"string\",\n\t\t\t\t\t\"description\": \"Typ trvaleho prikazu - moznosti jsou TU (ucet), TS (slozenku), ZI (zadost o inkaso), AP (automaticky prevod), 96 (APU96)\",\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493737e\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"propertyName\": \"status\",\n\t\t\t\t\t\"path\": \"getStandingOrderPaymentsResponse\",\n\t\t\t\t\t\"propertyType\": \"object\",\n\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\"group\": \"response\",\n\t\t\t\t\t\"_id\": \"5aaa9c1257141922b493737d\"\n\t\t\t\t}\n\t\t]\n}"
+			},
+			"created": 1521719175041,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4e904441330643d9a7ed10707cc6de0c",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1521719175041,
+			"method": "PUT",
+			"modified": 1521719744529,
+			"name": "Update service",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5aaa9c1257141922b493737c",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1adc6c088e1f4df4b715668c9a0686d9",
+			"authentication": {},
+			"body": {},
+			"created": 1521719867774,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1521719867774,
+			"method": "DELETE",
+			"modified": 1523863300537,
+			"name": "Delete service",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5ad44eb6f8f4072e94798955",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bc5d62a400e14db2ba8285f418118add",
+			"authentication": {},
+			"body": {},
+			"created": 1522162523879,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1522327363060,
+			"method": "GET",
+			"modified": 1527152348617,
+			"name": "Get service mapping list",
+			"parameters": [],
+			"parentId": "fld_56a5b9bdb4bf40ad8e1e65b20b64e2ee",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ apiRoute }}services/5ad44e91f8f4072e94798942/mappings",
+			"_type": "request"
+		},
+		{
+			"_id": "req_383a563ec5014849a5ecee31d576b425",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"mappingName\": \"haha\",\n\t\"dependencyServices\": [\n\t\t{\n\t\t\t\"service\": \"5aa805db184d3e2fa833bcd0\"\n\t\t},\n\t\t{\n\t\t\t\"service\": \"5aaa9c0f57141922b4937362\"\n\t\t}\n\t]\n}"
+			},
+			"created": 1522162554558,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_8f6d8d5de4f54ee09905352b98bb6436",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522327363035,
+			"method": "POST",
+			"modified": 1525094496760,
+			"name": "Add service mapping",
+			"parameters": [],
+			"parentId": "fld_56a5b9bdb4bf40ad8e1e65b20b64e2ee",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5ad44e91f8f4072e94798942/mappings",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5a1c69911a0f4b4f9ba1fbb0a82c970f",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"mappingName\": \"peklo669\", \n\t\"dependencyServices\": [\n\t\t\"5a4b9160b011a316d078458a\",\"5aaa9c0f57141922b4937362\" \n\t]\n}"
+			},
+			"created": 1522325818347,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b75cec29cfa54b8ba64a3b26a187ed44",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522327362985,
+			"method": "PUT",
+			"modified": 1524488655986,
+			"name": "Update mapping",
+			"parameters": [],
+			"parentId": "fld_56a5b9bdb4bf40ad8e1e65b20b64e2ee",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5ad44e91f8f4072e94798942/mappings/5addd88bb307e922c49f9970",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fa9b5eaaf20c4ae7866b5f97a937d3fa",
+			"authentication": {},
+			"body": {},
+			"created": 1522327363085,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1522327363085,
+			"method": "GET",
+			"modified": 1527152359757,
+			"name": "Get service mapping by id",
+			"parameters": [],
+			"parentId": "fld_56a5b9bdb4bf40ad8e1e65b20b64e2ee",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ apiRoute  }}services/5a4b9160b011a316d078458a/mappings/5ae71088f6c8102e90c89d5d",
+			"_type": "request"
+		},
+		{
+			"_id": "req_969f6800b19f48fea43296d6f4739f43",
+			"authentication": {},
+			"body": {},
+			"created": 1525091867701,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1525091867701,
+			"method": "GET",
+			"modified": 1527235409059,
+			"name": "Get dependency by id",
+			"parameters": [],
+			"parentId": "fld_891c6d1a236543ccaccd9c36c8038e54",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ apiRoute  }}dependencies/5ae71863dba71c28b48e4104",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5b0e7af76c43420cb3ae0e976d54c55f",
+			"authentication": {},
+			"body": {},
+			"created": 1527152414390,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1527152414390,
+			"method": "GET",
+			"modified": 1527235401273,
+			"name": "Get property mapping detail",
+			"parameters": [],
+			"parentId": "fld_891c6d1a236543ccaccd9c36c8038e54",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ apiRoute  }}dependencies/5ae71863dba71c28b48e4104/properties/5aa805db184d3e2fa833bce9",
+			"_type": "request"
+		},
+		{
+			"_id": "req_df06799b13774e4c88031d8e0ddc4494",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"propertyId\": \"5aa805db184d3e2fa833bce9\",\n\t\"description\": \"fu\", \n\t\"dependencies\": [{\n        \"dependencyType\": \"const\",\n        \"codetable\": null,\n        \"const\": \"String\",\n        \"description\": \"String\"\n    }]\n}"
+			},
+			"created": 1527156709028,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_8b980a5db3384bd689efc26aee52cb11",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527156709028,
+			"method": "POST",
+			"modified": 1527244508235,
+			"name": "Add property mapping",
+			"parameters": [],
+			"parentId": "fld_891c6d1a236543ccaccd9c36c8038e54",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ apiRoute  }}dependencies/5ae71863dba71c28b48e4104/properties/",
+			"_type": "request"
+		}
+	]
+}
