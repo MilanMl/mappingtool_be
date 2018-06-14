@@ -32,6 +32,6 @@ var ServiceSchema = new Schema({
   lastModifiedBy: String,
   active: Boolean,
   properties: [Property.schema]
-});
+}, {usePushEach: true});
 
 module.exports = mongoose.model('Service', ServiceSchema);

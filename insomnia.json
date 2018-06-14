@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-06-05T11:45:35.095Z",
+	"__export_date": "2018-06-13T11:55:33.139Z",
 	"__export_source": "insomnia.desktop.app:v5.16.6",
 	"resources": [
 		{
@@ -145,7 +145,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1520870415698,
 			"method": "GET",
-			"modified": 1524061115369,
+			"modified": 1528804022121,
 			"name": "Get wsdl import detail",
 			"parameters": [],
 			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
@@ -154,7 +154,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "http://localhost:3002/api/wsdl-imports/5ad7538c14ce782828991249",
+			"url": "http://localhost:3002/api/wsdl-imports/5b1fb2abe6153a3894a4e70f",
 			"_type": "request"
 		},
 		{
@@ -198,7 +198,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1520870566371,
 			"method": "GET",
-			"modified": 1523865476833,
+			"modified": 1528804077736,
 			"name": "Get transformed wsdl operation",
 			"parameters": [],
 			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
@@ -207,7 +207,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "http://localhost:3002/api/wsdl-imports/5aabac0b148af603485b06ea/operations/5aabac0d148af603485b06ed/transformed",
+			"url": "http://localhost:3002/api/wsdl-imports/5b1fb2abe6153a3894a4e70f/operations/5b1fb2abe6153a3894a4e716/transformed",
 			"_type": "request"
 		},
 		{
@@ -215,7 +215,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n  \"createDate\": \"06\",\n  \"wsdlServiceName\": \"WS_MW_AccountTransaction_v02_05\",\n  \"sourceLink\": \"services/WWS_MW_AccountTransaction_v02_05/structured/WS_MW_AccountTransaction_v02_05.wsdl\",\n  \"version\": 1\n}"
+				"text": "{\n  \"createDate\": \"06\",\n  \"wsdlServiceName\": \"WS_MW_CgpService_v02_05\",\n  \"sourceLink\": \"services/WS_MW_CgpService_v02_05/structured/WS_MW_CgpService_v02_05.wsdl\",\n  \"version\": 1\n}"
 			},
 			"created": 1520870809236,
 			"description": "",
@@ -229,7 +229,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1520870809237,
 			"method": "POST",
-			"modified": 1524061394844,
+			"modified": 1528804241863,
 			"name": "Add new wsdl import",
 			"parameters": [],
 			"parentId": "fld_79f37592a1fb4163ba66ac32f3b4a8e4",
@@ -287,7 +287,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"serviceName\": \"WS_MW_BranchService_v02_02.notifyBranchOutageAsync\",\n\t\"userDefined\": false,\n\t\"serviceType\": \"SOAP\",\n\t\"properties\": [\n\t\t{\n\t\t\t\"propertyName\": \"branchBuilding\",\n\t\t\t\"path\": \"notifyBranchOutageRequest\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"branchBuildingId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": \"Id obchodniho mista\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outage\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"dateFrom\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"dateTime\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"dateTo\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"dateTime\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"internalNote\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"operationType\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"publicNoteCs\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"publicNoteEn\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"temporaryBranchId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDays\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage\",\n\t\t\t\"propertyType\": \"array\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDay\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"afternoonEnd\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"afternoonStart\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"morningEnd\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"morningStart\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDate\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"date\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageDayId\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"outageType\",\n\t\t\t\"path\": \"notifyBranchOutageRequest.branchBuilding.outage.outageDays.outageDay\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t}\n\t]\n}"
+				"text": "{\n\t\"serviceName\": \"WS_MW_SupplementaryPensionSavingsCalculator_v02_01.calculateMonthContribution\",\n\t\"userDefined\": false,\n\t\"serviceType\": \"SOAP\",\n\t\"properties\": [\n\t\t{\n\t\t\t\"propertyName\": \"retirementAgeCalculate\",\n\t\t\t\"path\": \"calculateMonthContributionRequest\",\n\t\t\t\"propertyType\": \"boolean\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"riskAversion\",\n\t\t\t\"path\": \"calculateMonthContributionRequest\",\n\t\t\t\"propertyType\": \"positiveInteger\",\n\t\t\t\"description\": \"Citlivost vuci riziku.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"targetAmount\",\n\t\t\t\"path\": \"calculateMonthContributionRequest\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"currentBalance\",\n\t\t\t\"path\": \"calculateMonthContributionRequest\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"accountBalance\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.currentBalance\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Aktualni ucetni zustatek na uctu.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"fundStrategies\",\n\t\t\t\"path\": \"calculateMonthContributionRequest\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"balancedFund\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Vyvazeny fond.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies.balancedFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"conservativeFund\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Konzervativni fond.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies.conservativeFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"dynamicFund\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Dynamicky fond.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies.dynamicFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"eaFund\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Eticky fond\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.fundStrategies.eaFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"person\",\n\t\t\t\"path\": \"calculateMonthContributionRequest\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"childrenCount\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.person\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": \"Pocet deti\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"birthDate\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.person\",\n\t\t\t\"propertyType\": \"date\",\n\t\t\t\"description\": \"Datum narozeni.\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"gender\",\n\t\t\t\"path\": \"calculateMonthContributionRequest.person\",\n\t\t\t\"propertyType\": \"string\",\n\t\t\t\"description\": \"pohlavi\",\n\t\t\t\"group\": \"request\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"calculation\",\n\t\t\t\"path\": \"calculateMonthContributionResponse\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"monthContribution\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation\",\n\t\t\t\"propertyType\": \"int\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"calculatedStrategies\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": null,\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"balancedFund\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Vyvazeny fond.\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies.balancedFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"conservativeFund\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Konzervativni fond.\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies.conservativeFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"dynamicFund\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Dynamicky fond.\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies.dynamicFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"eaFund\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies\",\n\t\t\t\"propertyType\": \"object\",\n\t\t\t\"description\": \"Eticky fond\",\n\t\t\t\"group\": \"response\"\n\t\t},\n\t\t{\n\t\t\t\"propertyName\": \"share\",\n\t\t\t\"path\": \"calculateMonthContributionResponse.calculation.calculatedStrategies.eaFund\",\n\t\t\t\"propertyType\": \"decimal\",\n\t\t\t\"description\": \"Podil z celkovych investic do dane strategie.\",\n\t\t\t\"group\": \"response\"\n\t\t}\n\t]\n}"
 			},
 			"created": 1520959631287,
 			"description": "",
@@ -301,7 +301,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1520959631287,
 			"method": "POST",
-			"modified": 1523863243489,
+			"modified": 1528811893907,
 			"name": "Create service",
 			"parameters": [],
 			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
@@ -323,7 +323,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1521207465632,
 			"method": "GET",
-			"modified": 1523278674753,
+			"modified": 1528886974173,
 			"name": "Get service detail",
 			"parameters": [],
 			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
@@ -332,7 +332,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "http://localhost:3002/api/services/5acb6320146f2f27c042ce2e/",
+			"url": "http://localhost:3002/api/services/5b1a73a1256dcf2838fa626f/",
 			"_type": "request"
 		},
 		{
@@ -386,6 +386,90 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "http://localhost:3002/api/services/5ad44eb6f8f4072e94798955",
+			"_type": "request"
+		},
+		{
+			"_id": "req_033ecf109d5245238c42fdec21424e53",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"propertyName\": \"p2\",\n\t\"path\": \"abc\",\n\t\"propertyType\": \"string\",\n\t\"description\": \"Texticek\",\n\t\"group\": \"response\",\n\t\"mandatory\": false\n}"
+			},
+			"created": 1528886939967,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_5e705a37f8c3455d83c7879ddc3fa061",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528886939967,
+			"method": "POST",
+			"modified": 1528890826739,
+			"name": "Add property",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5b1a73a1256dcf2838fa626f/properties",
+			"_type": "request"
+		},
+		{
+			"_id": "req_91b335daacfd449781679a6aebc54ad2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"propertyName\": \"aaaa\",\n\t\"path\": \"abc.yyy\",\n\t\"propertyType\": \"string\",\n\t\"description\": \"Texticek\",\n\t\"group\": \"response\",\n\t\"mandatory\": false\n}"
+			},
+			"created": 1528889626901,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_72755b3c649c4b5f9b6bc6ef1965bea6",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528889626901,
+			"method": "PUT",
+			"modified": 1528890410425,
+			"name": "Update property",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5b1a73a1256dcf2838fa626f/properties/5b20fa05b2e4af30ac161514",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1ea8cf254fa843ada7b95e404ee1d59a",
+			"authentication": {},
+			"body": {},
+			"created": 1528890654956,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1528890654956,
+			"method": "DELETE",
+			"modified": 1528890817466,
+			"name": "Delete service property",
+			"parameters": [],
+			"parentId": "fld_cfb0891d8c704f6f919516f2fddcf384",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3002/api/services/5b1a73a1256dcf2838fa626f/properties/5b20fa05b2e4af30ac161514",
 			"_type": "request"
 		},
 		{

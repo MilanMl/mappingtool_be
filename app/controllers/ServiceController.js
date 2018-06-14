@@ -1,4 +1,5 @@
 import ServiceModel from '../models/ServiceModel';
+import PropertyModel from '../models/PropertyModel';
 import {SharedService} from '../services/SharedService';
 import {PaginatedResult} from '../services/PaginatedResult';
 
@@ -115,6 +116,124 @@ export const ServiceController = {
             ctx.response.status = 404;
             ctx.response.body = {message: e};
         }
-    }
+    }, 
+
+    // není jak vyuzit 
+    getServiceProperties: async function (ctx) {
+        const filter = {
+            _id: ctx.params.serviceId,
+            active: true
+        }
+    }, 
+
+    addServiceProperty: async function (ctx) {
+        const filter = {
+            _id: ctx.params.serviceId,
+            active: true
+        }
+
+        try {
+            let service = await ServiceModel.findOne(filter);
+
+            if(service) {
+                let request = ctx.request.body
+                let newProperty = new PropertyModel(request)
+                service.properties.push(newProperty)
+
+                let updatedService = await service.save()
+                ctx.response.status = 200;
+                ctx.response.body = updatedService
+            } else {
+                throw "Service not found";
+            }
+
+        } catch (e) {
+            console.log(e)
+            ctx.response.status = 404;
+            ctx.response.body = {message: e};
+        }
+    }, 
+
+    // neni pouziti 
+    getServicePropertyById: async function (ctx) {
+        const filter = {
+            _id: ctx.params.serviceId,
+            active: true
+        }
+    },
+
+    updateServiceProperty: async function (ctx) {
+        const filter = {
+            _id: ctx.params.serviceId,
+            active: true
+        }
+
+        try {
+
+            let service = await ServiceModel.findOne(filter)
+
+            if(service) {
+
+                let request = ctx.request.body
+                let updatedProperty = service.properties.id(ctx.params.propertyId)
+
+                if(updatedProperty) {
+                    updatedProperty.propertyName = request.propertyName
+                    updatedProperty.path = request.path
+                    updatedProperty.propertyType = request.propertyType
+                    updatedProperty.group = request.group
+                    updatedProperty.mandatory = request.mandatory
+                    updatedProperty.description = request.description
+                } else {
+                    throw "Property not found";
+                }
+
+                ctx.response.body = await service.save()
+
+            } else {
+                throw "Service not found";
+            }
+            
+
+        } catch (e) {
+            console.log(e)
+            ctx.response.status = 404;
+            ctx.response.body = {message: e};
+        }
+    },
+
+    deleteServiceProperty: async function (ctx) {
+        const filter = {
+            _id: ctx.params.serviceId,
+            active: true
+        }
+
+        try {
+
+            let service = await ServiceModel.findOne(filter)
+
+            if(service) {
+
+                let removedProperty = service.properties.id(ctx.params.propertyId)
+
+                if(removedProperty) {
+                    removedProperty.remove()
+                } else {
+                    throw "Property not found";
+                }
+
+                ctx.response.body = await service.save()
+
+            } else {
+                throw "Service not found";
+            }
+            
+
+        } catch (e) {
+            console.log(e)
+            ctx.response.status = 404;
+            ctx.response.body = {message: e};
+        }
+    },
 
 }

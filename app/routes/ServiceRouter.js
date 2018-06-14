@@ -10,13 +10,10 @@ router
     .get('/:serviceId', ServiceController.getServiceDetail)
     .put('/:serviceId', ServiceController.updateService)
     .delete('/:serviceId', ServiceController.deleteService)
-
-    /*
-    .get('/:serviceId/mappings', ServiceMappingController.getServiceMappings)
-    .post('/:serviceId/mappings', ServiceMappingController.addServiceMapping)
-    .get('/:serviceId/mappings/:mappingId', ServiceMappingController.getServiceMappingById)
-    .put('/:serviceId/mappings/:mappingId', ServiceMappingController.updateServiceMapping)
-    .delete('/:serviceId/mappings/:mappingId', ServiceMappingController.deleteServiceMapping)
-    */
+    .get('/:serviceId/properties', ServiceController.getServiceProperties)
+    .post('/:serviceId/properties', ServiceController.addServiceProperty)
+    .get('/:serviceId/properties/:propertyId', ServiceController.getServicePropertyById)
+    .put('/:serviceId/properties/:propertyId', ServiceController.updateServiceProperty)
+    .delete('/:serviceId/properties/:propertyId', ServiceController.deleteServiceProperty)
 
 export default router;
