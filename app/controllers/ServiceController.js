@@ -16,7 +16,9 @@ export const ServiceController = {
 
             ctx.response.body = await newService.save();
         } catch (e) {
-            console.log(666)
+            console.log(e)
+            ctx.response.status = 400;
+            ctx.response.body = e;
         }
 
     },
@@ -38,7 +40,9 @@ export const ServiceController = {
             
             paginatedResult.setItems(list);
         } catch (e) {
-            console.log(666)
+            console.log(e)
+            ctx.response.status = 400;
+            ctx.response.body = e;
         }
 
         ctx.response.body = paginatedResult.getResult();
@@ -61,6 +65,7 @@ export const ServiceController = {
             }
 
         } catch (e) {
+            console.log(e)
             ctx.response.status = 400;
             ctx.response.body = e;
         }
@@ -79,6 +84,7 @@ export const ServiceController = {
 
             if(service) {
                 service.serviceName = request.serviceName;
+                service.serviceType = request.serviceType;
                 service.lastModifiedAt = new Date();
                 service.properties = request.properties;
                 ctx.response.body = await service.save();
