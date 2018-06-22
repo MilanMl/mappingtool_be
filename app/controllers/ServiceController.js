@@ -2,6 +2,7 @@ import ServiceModel from '../models/ServiceModel';
 import PropertyModel from '../models/PropertyModel';
 import {SharedService} from '../services/SharedService';
 import {PaginatedResult} from '../services/PaginatedResult';
+import ENUMS from '../enums';
 
 
 export const ServiceController = {
@@ -144,6 +145,8 @@ export const ServiceController = {
             if(service) {
                 let request = ctx.request.body
                 let newProperty = new PropertyModel(request)
+                newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
+
                 service.properties.push(newProperty)
 
                 let updatedService = await service.save()
@@ -223,7 +226,8 @@ export const ServiceController = {
                 let removedProperty = service.properties.id(ctx.params.propertyId)
 
                 if(removedProperty) {
-                    removedProperty.remove()
+                    removedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
+                    service.lastModifiedAt = new Date()
                 } else {
                     throw "Property not found";
                 }
