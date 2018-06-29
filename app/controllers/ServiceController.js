@@ -193,6 +193,7 @@ export const ServiceController = {
                     updatedProperty.group = request.group
                     updatedProperty.mandatory = request.mandatory
                     updatedProperty.description = request.description
+                    updatedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.UPDATE
                 } else {
                     throw "Property not found";
                 }

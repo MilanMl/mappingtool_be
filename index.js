@@ -10,7 +10,7 @@ import ENV_CONFIG from './app/config/envConfig';
 import mongoose from 'mongoose';
 
 const dbRoute = application.getDbConnectionRoute();
-
+console.log(dbRoute)
 mongoose.connect(dbRoute, { useMongoClient: true });
 mongoose.connection
   .on('connected', function() {
