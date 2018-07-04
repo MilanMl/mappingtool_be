@@ -18,13 +18,17 @@ export const ServiceMappingController = {
 
                 const dependencyServiceList = [];
 
-                for(let i = 0; i < ctx.request.body.dependencyServices.length; i++) {
-                    const dependency = new DependencyServiceModel(ctx.request.body.dependencyServices[i]);
-                    dependency.mappedProperties = []
-                    const newDependency = await dependency.save();
-                    dependencyServiceList.push(newDependency)
+                if(mappedService.dependencyServices) {
+                    // zalozeni dependency services
+                    for(let i = 0; i < ctx.request.body.dependencyServices.length; i++) {
+                        const dependency = new DependencyServiceModel(ctx.request.body.dependencyServices[i]);
+                        dependency.mappedProperties = []
+                        const newDependency = await dependency.save();
+                        dependencyServiceList.push(newDependency)
+                    }
                 }
 
+                // ulozeni samotneho mapovani, respektive use case + jeho dependency services 
                 const newMappingObject = {
                     mappedService: ctx.params.serviceId, 
                     mappingName: ctx.request.body.mappingName,
@@ -97,8 +101,10 @@ export const ServiceMappingController = {
             let mapping = await ServiceMapping.findOne(filter);
             mapping.mappingName = ctx.request.body.mappingName;
             mapping.dependencyServices = ctx.request.body.dependencyServices;
-            const updatedMapping = await mapping.save();
-            ctx.response.body = updatedMapping;
+            const updatedMapping = await mapping.save()
+            const populatedResult = await ServiceMapping.populate(updatedMapping, {path:'dependencyServices.service', select: 'serviceName sourceSystem serviceType'})
+
+            ctx.response.body = populatedResult;
 
         } catch (e) {
             console.log(e)
