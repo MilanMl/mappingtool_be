@@ -49,6 +49,45 @@ export const ServiceMappingController = {
         }
 
     },
+
+    cloneServiceMapping: async function (ctx) {
+
+        const filter = {
+            _id: ctx.params.mappingId,
+            mappedService: ctx.params.serviceId
+        }
+
+        try {
+            let mapping = await ServiceMapping.findOne(filter)
+            
+            if(mapping) {
+
+                let clonedMapping = {
+                    mappingName: ctx.request.body.mappingName,
+                    mappedService: mapping.mappedService,
+                    dependencyServices: mapping.dependencyServices
+                }
+
+                const newMapping = new ServiceMapping(clonedMapping);
+                await newMapping.save();
+
+                const populateObject = { 
+                    path: 'dependencyServices.service', 
+                    select: 'serviceName sourceSystem serviceType'
+                }
+                
+                const populatedResult = await ServiceMapping.populate(newMapping, populateObject)
+
+                ctx.response.body = populatedResult;
+            } else {
+                throw "Service or cloned mapping not found";
+            }
+
+        } catch(e) {
+            ctx.response.status = 400;
+            ctx.response.body = e.message;
+        }
+    },
     
     getServiceMappings: async function (ctx) {
 

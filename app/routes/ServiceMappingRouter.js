@@ -9,5 +9,6 @@ router
     .get('/:mappingId', ServiceMappingController.getServiceMappingById)
     .put('/:mappingId', ServiceMappingController.updateServiceMapping)
     .delete('/:mappingId', ServiceMappingController.deleteServiceMapping)
+    .post('/:mappingId/clone', ServiceMappingController.cloneServiceMapping)
 
 export default router;
