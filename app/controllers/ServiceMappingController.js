@@ -2,6 +2,24 @@ import ServiceMapping  from '../models/ServiceMappingModel';
 import ServiceModel from '../models/ServiceModel';
 import DependencyServiceModel from '../models/DependencyServiceModel';
 
+const dependencyServicePopulate = { 
+    path: 'dependencyServices.service', 
+    select: 'serviceName sourceSystem serviceType'
+}
+
+const mappingPopulate = {
+    path: 'mappedService', 
+    select: 'serviceName sourceSystem serviceType'
+}
+
+async function addDepencyService(dependency) {
+    let dependencyModel = new DependencyServiceModel(dependency);
+    dependencyModel.mappedProperties = []
+    dependencyModel = await dependencyModel.save();
+    return dependencyModel
+}
+
+
 export const ServiceMappingController = {
 
     addServiceMapping: async function (ctx) {
@@ -21,9 +39,7 @@ export const ServiceMappingController = {
                 if(mappedService.dependencyServices) {
                     // zalozeni dependency services
                     for(let i = 0; i < ctx.request.body.dependencyServices.length; i++) {
-                        const dependency = new DependencyServiceModel(ctx.request.body.dependencyServices[i]);
-                        dependency.mappedProperties = []
-                        const newDependency = await dependency.save();
+                        const newDependency = await addDepencyService(ctx.request.body.dependencyServices[i]);
                         dependencyServiceList.push(newDependency)
                     }
                 }
@@ -52,6 +68,7 @@ export const ServiceMappingController = {
 
     cloneServiceMapping: async function (ctx) {
 
+        // dodelat vznik DependencyServiceModel
         const filter = {
             _id: ctx.params.mappingId,
             mappedService: ctx.params.serviceId
@@ -68,17 +85,11 @@ export const ServiceMappingController = {
                     dependencyServices: mapping.dependencyServices
                 }
 
-                const newMapping = new ServiceMapping(clonedMapping);
-                await newMapping.save();
+                clonedMapping = new ServiceMapping(clonedMapping);
+                await clonedMapping.save();
+                clonedMapping = await ServiceMapping.populate(clonedMapping, dependencyServicePopulate)
 
-                const populateObject = { 
-                    path: 'dependencyServices.service', 
-                    select: 'serviceName sourceSystem serviceType'
-                }
-                
-                const populatedResult = await ServiceMapping.populate(newMapping, populateObject)
-
-                ctx.response.body = populatedResult;
+                ctx.response.body = clonedMapping;
             } else {
                 throw "Service or cloned mapping not found";
             }
@@ -95,8 +106,8 @@ export const ServiceMappingController = {
 
         try {
             const list = await ServiceMapping.find(filter)
-                .populate('mappedService', 'serviceName sourceSystem serviceType')
-                .populate('dependencyServices.service', 'serviceName sourceSystem serviceType')
+                .populate(mappingPopulate)
+                .populate(dependencyServicePopulate)
                 .select('-dependencyServices.mappedProperties');
 
             ctx.response.body = {
@@ -118,8 +129,8 @@ export const ServiceMappingController = {
         try {
 
             let mapping = await ServiceMapping.findOne(filter)
-                .populate('mappedService', 'serviceName sourceSystem serviceType')
-                .populate('dependencyServices.service', 'serviceName sourceSystem serviceType')
+                .populate(mappingPopulate)
+                .populate(dependencyServicePopulate)
                 .select('-dependencyServices.mappedProperties');
 
             ctx.response.body = mapping;
@@ -140,8 +151,18 @@ export const ServiceMappingController = {
             let mapping = await ServiceMapping.findOne(filter);
             mapping.mappingName = ctx.request.body.mappingName;
             mapping.dependencyServices = ctx.request.body.dependencyServices;
-            const updatedMapping = await mapping.save()
-            const populatedResult = await ServiceMapping.populate(updatedMapping, {path:'dependencyServices.service', select: 'serviceName sourceSystem serviceType'})
+
+            /*
+            if(mapping.dependencyServices) {
+                // zalozeni dependency services
+                for(let i = 0; i < mapping.dependencyServices.length; i++) {
+                    addDepencyService(mapping.dependencyServices[i]);
+                }
+            }
+            */
+
+            mapping = await mapping.save()
+            const populatedResult = await ServiceMapping.populate(mapping, dependencyServicePopulate)
 
             ctx.response.body = populatedResult;
 
