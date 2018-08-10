@@ -1,6 +1,7 @@
-import ServiceMapping  from '../models/ServiceMappingModel';
-import ServiceModel from '../models/ServiceModel';
-import DependencyServiceModel from '../models/DependencyServiceModel';
+import ServiceMapping  from '../models/ServiceMappingModel'
+import ServiceModel from '../models/ServiceModel'
+import DependencyServiceModel from '../models/DependencyServiceModel'
+import {MappingHelper} from '../services/MappingHelper'
 
 const dependencyServicePopulate = { 
     path: 'dependencyServices.service', 
@@ -13,167 +14,97 @@ const mappingPopulate = {
 }
 
 async function addDepencyService(dependency) {
-    let dependencyModel = new DependencyServiceModel(dependency);
+    let dependencyModel = new DependencyServiceModel(dependency)
     dependencyModel.mappedProperties = []
-    dependencyModel = await dependencyModel.save();
+    dependencyModel = await dependencyModel.save()
     return dependencyModel
 }
-
 
 export const ServiceMappingController = {
 
     addServiceMapping: async function (ctx) {
 
-        const filter = {
-            _id: ctx.params.serviceId,
-            active: true
-        }
-
         try {
-            const mappedService = await ServiceModel.findOne(filter);
-
-            if(mappedService) {
-
-                const dependencyServiceList = [];
-
-                if(mappedService.dependencyServices) {
-                    // zalozeni dependency services
-                    for(let i = 0; i < ctx.request.body.dependencyServices.length; i++) {
-                        const newDependency = await addDepencyService(ctx.request.body.dependencyServices[i]);
-                        dependencyServiceList.push(newDependency)
-                    }
-                }
-
-                // ulozeni samotneho mapovani, respektive use case + jeho dependency services 
-                const newMappingObject = {
-                    mappedService: ctx.params.serviceId, 
-                    mappingName: ctx.request.body.mappingName,
-                    dependencyServices: dependencyServiceList
-                }
-
-                const newMapping = new ServiceMapping(newMappingObject);
-                await newMapping.save();
-
-                ctx.response.body = newMapping;
-
-            } else {
-                throw "Service not found";
-            }
+            ctx.response.body = await MappingHelper.addServiceMapping(ctx.params.serviceId,ctx.request.body)
         } catch (e) {
-            ctx.response.status = 400;
-            ctx.response.body = e.message;
+            ctx.status = e.statusCode || e.status || 500
+            ctx.app.emit('error', e, ctx)
         }
-
     },
 
     cloneServiceMapping: async function (ctx) {
 
-        // dodelat vznik DependencyServiceModel
-        const filter = {
-            _id: ctx.params.mappingId,
-            mappedService: ctx.params.serviceId
-        }
-
         try {
-            let mapping = await ServiceMapping.findOne(filter)
-            
-            if(mapping) {
-
-                let clonedMapping = {
-                    mappingName: ctx.request.body.mappingName,
-                    mappedService: mapping.mappedService,
-                    dependencyServices: mapping.dependencyServices
-                }
-
-                clonedMapping = new ServiceMapping(clonedMapping);
-                await clonedMapping.save();
-                clonedMapping = await ServiceMapping.populate(clonedMapping, dependencyServicePopulate)
-
-                ctx.response.body = clonedMapping;
-            } else {
-                throw "Service or cloned mapping not found";
-            }
+            ctx.response.body = await MappingHelper.cloneServiceMapping(ctx.params.serviceId,ctx.params.mappingId,ctx.request.body)
 
         } catch(e) {
-            ctx.response.status = 400;
-            ctx.response.body = e.message;
+            ctx.response.status = 400
+            ctx.response.body = e.message
         }
     },
     
     getServiceMappings: async function (ctx) {
 
-        const filter = { mappedService: ctx.params.serviceId };
+        let list = []
 
         try {
-            const list = await ServiceMapping.find(filter)
-                .populate(mappingPopulate)
-                .populate(dependencyServicePopulate)
-                .select('-dependencyServices.mappedProperties');
+            list = await MappingHelper.getServiceMappings(ctx.params.serviceId)
 
             ctx.response.body = {
                 mappings: list    
             }
 
         } catch (e) {
-            ctx.response.status = 400;
-            ctx.response.body = e.message;
+            ctx.response.status = 400
+            ctx.response.body = {message: e.message}
         }        
     }, 
 
     getServiceMappingById: async function (ctx) {
-        const filter = {
-            _id: ctx.params.mappingId,
-            mappedService: ctx.params.serviceId
-        }
 
         try {
-
-            let mapping = await ServiceMapping.findOne(filter)
-                .populate(mappingPopulate)
-                .populate(dependencyServicePopulate)
-                .select('-dependencyServices.mappedProperties');
-
-            ctx.response.body = mapping;
-
-        } catch (e) {
-            console.log(e)
-        }
+            ctx.response.body = await MappingHelper.getServiceMappingById(ctx.params.serviceId,ctx.params.mappingId)
+        } catch(e) {
+            ctx.response.status = 400
+            ctx.response.body = {message: e.message}
+        } 
     },
 
     updateServiceMapping: async function (ctx) {
-        const filter = {
-            _id: ctx.params.mappingId,
-            mappedService: ctx.params.serviceId
-        }
-
+  
         try {
-
-            let mapping = await ServiceMapping.findOne(filter);
-            mapping.mappingName = ctx.request.body.mappingName;
-            mapping.dependencyServices = ctx.request.body.dependencyServices;
-
-            /*
-            if(mapping.dependencyServices) {
-                // zalozeni dependency services
-                for(let i = 0; i < mapping.dependencyServices.length; i++) {
-                    addDepencyService(mapping.dependencyServices[i]);
-                }
-            }
-            */
-
-            mapping = await mapping.save()
-            const populatedResult = await ServiceMapping.populate(mapping, dependencyServicePopulate)
-
-            ctx.response.body = populatedResult;
-
+            ctx.response.body = await MappingHelper.updateServiceMapping(ctx.params.serviceId,ctx.params.mappingId, ctx.request.body)
         } catch (e) {
             console.log(e)
         }
     }, 
 
     deleteServiceMapping: async function (ctx) {
-        
+        ctx.response.status = 501
     }, 
+
+    addMappingDependency: async function (ctx) {
+        try {
+            ctx.response.body = await MappingHelper.addMappingDependency(ctx.params.serviceId,ctx.params.mappingId,ctx.request.body)
+        } catch (e) {
+            ctx.status = e.statusCode || e.status || 500
+            ctx.app.emit('error', e, ctx)
+        }
+    },
+
+    getMappingDependencies: async function (ctx) {
+        const filter = {
+            mappedService: ctx.params.serviceId,
+            _id: ctx.params.mappingId
+        }
+    },
+
+    deleteMappingDependency: async function (ctx) {
+        const filter = {
+            mappedService: ctx.params.serviceId,
+            _id: ctx.params.mappingId
+        }
+    },
 
     getServiceMappingDetail: async function (ctx) {
 
@@ -218,6 +149,6 @@ export const ServiceMappingController = {
             ]
         }
 
-        ctx.response.body = response;
+        ctx.response.body = response
     }
 }

@@ -29,6 +29,9 @@ app
   .use(cors({ origin: ENV_CONFIG.LOCAL.ALLOWED_CORS.URL }))
   .use(BodyParser())
   .use(router)
+  .on('error', (err, ctx) => {
+    ctx.body = {message: err.message}
+  })
   .use(
     mount(
       '/static_folder',
@@ -39,6 +42,6 @@ app
         }
       })
     )
-  );
+  )
 
 app.listen(ENV_CONFIG.LOCAL.PORT);

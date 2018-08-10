@@ -1,15 +1,16 @@
 import Router from 'koa-router';
 import { ServiceDependenciesController } from '../controllers/ServiceDependenciesController';
 
-const router = new Router({prefix: '/api/dependencies/:dependencyId'});
+const router = new Router({prefix: '/api/dependencies'});
 
 router
-    .get('/', ServiceDependenciesController.getServiceDependencyById)
-    .put('/', ServiceDependenciesController.updateServiceDependency)
-    .delete('/', ServiceDependenciesController.deleteServiceDependency)
-    .post('/properties/', ServiceDependenciesController.addPropertyMapping)
-    .get('/properties/:propertyId', ServiceDependenciesController.getPropertyMapping)
-    .put('/properties/:propertyId', ServiceDependenciesController.updatePropertyMapping)
-    .delete('/properties/:propertyId', ServiceDependenciesController.deletePropertyMapping)
+    .post('/:dependencyId/properties/', ServiceDependenciesController.addPropertyMapping)
+    .get('/:dependencyId', ServiceDependenciesController.getServiceDependencyById)
+    .put('/:dependencyId', ServiceDependenciesController.updateServiceDependency)
+    .delete('/:dependencyId', ServiceDependenciesController.deleteServiceDependency)
+    .post('/:dependencyId/properties/', ServiceDependenciesController.addPropertyMapping)
+    .get('/:dependencyId/properties/:propertyId', ServiceDependenciesController.getPropertyMapping)
+    .put('/:dependencyId/properties/:propertyId', ServiceDependenciesController.updatePropertyMapping)
+    .delete('/:dependencyId/properties/:propertyId', ServiceDependenciesController.deletePropertyMapping)
 
 export default router;

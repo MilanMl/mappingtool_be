@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import ENUMS from '../enums';
-
-var DependencyService = require('./DependencyServiceModel');
 
 var Schema = mongoose.Schema;
 
@@ -15,7 +12,8 @@ var ServiceMapping = new Schema({
     },
     dependencyServices: {
         type: [{ 
-            type: DependencyService.schema 
+            type: Schema.Types.ObjectId, 
+            ref: 'DependencyService'
         }],
         default: []
     }
