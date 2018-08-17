@@ -1,20 +1,17 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+var Schema = mongoose.Schema
 
-var PropertyMapping = require('./PropertyMappingModel');
-var Service = require('./ServiceModel');
+var PropertyMapping = require('./PropertyMappingModel')
 
 var DependencyServiceSchema = new Schema({
-    service: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'Service' 
-    },
-    mappedProperties: {
-        type: [{ 
-                type: PropertyMapping.schema
-        }],
-        default: []
-    }
-});
+	service: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'Service' 
+	},
+	mappedProperties: {
+		type: [PropertyMapping.schema],
+		default: []
+	}
+},{usePushEach: true})
 
-module.exports = mongoose.model('DependencyService', DependencyServiceSchema)
+export default mongoose.model('DependencyService', DependencyServiceSchema)

@@ -1,25 +1,24 @@
-import mongoose from 'mongoose';
-import ENUMS from '../enums';
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+var Schema = mongoose.Schema
 
 var PropertyDependencySchema = new Schema({
-    serviceMapping: {
-        type: Schema.Types.ObjectId, 
-        ref: 'ServiceMapping' 
-    },
-    propertyId: {
-        type: Schema.Types.ObjectId, 
-        ref: 'Property' 
-    },
-    description: {
-        type: String
-    },
-    mandatory: {
-        type: Boolean
-    }
-});
+	serviceMapping: {
+		type: Schema.Types.ObjectId, 
+		ref: 'ServiceMapping' 
+	},
+	propertyId: {
+		type: Schema.Types.ObjectId, 
+		ref: 'Property' 
+	},
+	description: {
+		type: String
+	},
+	mandatory: {
+		type: Boolean
+	}
+})
 
-module.exports = mongoose.model('PropertyDependency', PropertyDependencySchema)
+export default mongoose.model('PropertyDependency', PropertyDependencySchema)
 
 /*
 

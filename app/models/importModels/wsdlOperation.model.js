@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var WsdlOperationSchema = new Schema({
-    operationName: String,
-    serviceDefinition: { type: Boolean, default: true }, 
-});
+	operationName: String,
+	serviceDefinition: { type: Boolean, default: true }, 
+})
   
-module.exports = mongoose.model('WsdlOperation', WsdlOperationSchema);
+export default mongoose.model('WsdlOperation', WsdlOperationSchema)

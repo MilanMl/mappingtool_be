@@ -1,27 +1,27 @@
-import mongoose from 'mongoose';
-var Dependency = require('./DependencyModel');
+import mongoose from 'mongoose'
+var Dependency = require('./DependencyModel')
 
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var PropertyMappingSchema = new Schema({
-    propertyId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Property',
-        required: true
-    },
-    description: {
-        type: String
-    },
-    mandatory: {
-        type: Boolean
-    },
-    dependencies: {
-        type: [Dependency.schema],
-        default: []
-    }
-}, { _id: false });
+	propertyId: {
+		type: Schema.Types.ObjectId,
+		ref: 'Property',
+		required: true
+	},
+	description: {
+		type: String
+	},
+	mandatory: {
+		type: Boolean
+	},
+	dependencies: {
+		type: [Dependency.schema],
+		default: []
+	}
+}, { _id: false, usePushEach: true })
 
-module.exports = mongoose.model('PropertyMapping', PropertyMappingSchema)
+export default mongoose.model('PropertyMapping', PropertyMappingSchema)
 
 /*
 

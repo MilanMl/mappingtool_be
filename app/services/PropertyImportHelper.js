@@ -1,88 +1,87 @@
-import ENUMS from '../enums'
-import PropertyModel from '../models/PropertyModel';
+import PropertyModel from '../models/PropertyModel'
 
 export const PropertyImportHelper = function PropertyImportHelper(example, group) {
 
-    const OBJECT = 'object'
-    const ARRAY = 'array'
-    const STRING = 'string'
-    const INT = 'int'
-    const BOOLEAN = 'boolean'
+	const OBJECT = 'object'
+	const ARRAY = 'array'
+	const STRING = 'string'
+	const INT = 'int'
+	const BOOLEAN = 'boolean'
 
-    this.group = group
-    this.example = example
+	this.group = group
+	this.example = example
 
-    const parseObject = function(object,group, path = '') {
-        let properties = []
-        for(let objectProperty in object) {
-            let property = new PropertyModel()
-            property.propertyType = getPropertyType(object[objectProperty])
-            property.propertyName = objectProperty
-            property.group = group
-            property.mandatory = false
-            property.path = path
+	const parseObject = function(object,group, path = '') {
+		let properties = []
+		for(let objectProperty in object) {
+			let property = new PropertyModel()
+			property.propertyType = getPropertyType(object[objectProperty])
+			property.propertyName = objectProperty
+			property.group = group
+			property.mandatory = false
+			property.path = (path) ? path + '.' + objectProperty : objectProperty
             
-            properties.push(property)
+			properties.push(property)
 
-            if(property.propertyType === OBJECT) {
-               let props = parseObject(object[objectProperty],group, createPath(path,objectProperty))
-               properties = properties.concat(props)
-            }
+			if(property.propertyType === OBJECT) {
+				let props = parseObject(object[objectProperty],group, createPath(property.path,objectProperty))
+				properties = properties.concat(props)
+			}
 
-            if(property.propertyType === ARRAY) {
-                const firstChildType = getPropertyType(object[objectProperty][0])
+			if(property.propertyType === ARRAY) {
+				const firstChildType = getPropertyType(object[objectProperty][0])
 
-                if(firstChildType === OBJECT) {
-                    let props = parseObject(object[objectProperty][0],group, createPath(path,objectProperty))
-                    properties = properties.concat(props)
-                }
-             }
-        }
+				if(firstChildType === OBJECT) {
+					let props = parseObject(object[objectProperty][0],group, createPath(path,objectProperty))
+					properties = properties.concat(props)
+				}
+			}
+		}
 
-        return properties
-    }
+		return properties
+	}
 
-    const createPath = function(currentPath,propertyName) {
-        if(currentPath.length > 0) {
-            return currentPath + '.' + propertyName
-        } else {
-            return propertyName
-        }
-    }
+	const createPath = function(currentPath,propertyName) {
+		if(currentPath.length > 0) {
+			return currentPath + '.' + propertyName
+		} else {
+			return propertyName
+		}
+	}
 
-    const getPropertyType = function(propertyValue) {
-        let type = null
+	const getPropertyType = function(propertyValue) {
+		let type = null
 
-        switch(typeof(propertyValue)) {
-            case 'string':
-                type = STRING
-            break
-            case 'boolean':
-                type = BOOLEAN
-            break
-            case 'number':
-                type = INT
-            break
-            case 'object':
-                if(Array.isArray(propertyValue)) {
-                    type = ARRAY
-                } else {
-                    type = OBJECT
-                }
-            break
-        }
+		switch(typeof(propertyValue)) {
+		case 'string':
+			type = STRING
+			break
+		case 'boolean':
+			type = BOOLEAN
+			break
+		case 'number':
+			type = INT
+			break
+		case 'object':
+			if(Array.isArray(propertyValue)) {
+				type = ARRAY
+			} else {
+				type = OBJECT
+			}
+			break
+		}
 
-        return type
-    }
+		return type
+	}
 
-    this.createProperties = function() {
-        return parseObject(this.example, this.group)
-    }
+	this.createProperties = function() {
+		return parseObject(this.example, this.group)
+	}
 
 }
 
 
-    /*
+/*
     const group = null
 
     function getProperties(jsonObject) {

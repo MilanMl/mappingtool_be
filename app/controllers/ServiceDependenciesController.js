@@ -1,81 +1,75 @@
-import ServiceDependency  from '../models/DependencyServiceModel';
-import PropertyMapping  from '../models/PropertyMappingModel';
-import Dependency from '../models/DependencyModel';
+import ServiceDependency  from '../models/DependencyServiceModel'
+import { ServiceDependencyHelper } from '../services/ServiceDependencyHelper'
 
 export const ServiceDependenciesController = {
 
-    getServiceDependencyById: async function (ctx) {
+	getServiceDependencyById: async function (ctx) {
         
-        const filter = {
-            _id: ctx.params.dependencyId
-        }
+		try {
+			ctx.response.body = await ServiceDependencyHelper.getDependencyById(ctx.params.dependencyId)
+			ctx.response.status = 200
+		} catch (e) {
+			ctx.status = e.statusCode || e.status || 500
+			ctx.app.emit('error', e, ctx)
+		}
 
-        const dependency = await ServiceDependency.findOne(filter);
-        ctx.response.body = dependency
+	},
 
-    },
-    
-    updateServiceDependency: async function (ctx) {
-      
-    }, 
+	addPropertyMapping: async function (ctx) {
 
-    deleteServiceDependency: async function (ctx) {
+		const filter = {
+			_id: ctx.params.dependencyId
+		}
         
-    },
+		let mappedProperty = ctx.request.body
 
-    addPropertyMapping: async function (ctx) {
+		try {
+			let Dependency = await ServiceDependency.findOne(filter)
+			let searchedProperty = Dependency.mappedProperties.find((property) => {
+				return property.propertyId == mappedProperty.propertyId
+			})
 
-        const filter = {
-            _id: ctx.params.dependencyId
-        }
+			if(searchedProperty) {
+				throw new Error('Dependency with propertyId: ' + ctx.request.body.propertyId + ' already exists.')
+			}
 
-        let mappedProperty = ctx.request.body;
+			Dependency.mappedProperties.push(mappedProperty)
+			ctx.response.body = await Dependency.save()
+		} catch (e) {
+			ctx.response.status = 400
+			ctx.response.body = e.message
+		}
+	}, 
 
-        try {
-            let Dependency = await ServiceDependency.findOne(filter);
-            let searchedProperty = Dependency.mappedProperties.find((property) => {
-                return property.propertyId == mappedProperty.propertyId
-            });
+	getPropertyMapping: async function (ctx) {
+		const filter = {
+			_id: ctx.params.dependencyId
+		}
 
-            if(searchedProperty) {
-                throw new Error("Dependency with propertyId: "+ ctx.request.body.propertyId + " already exists.");
-            }
+		try {
+			const dependency = await ServiceDependency.findOne(filter)
+			ctx.response.body = dependency.mappedProperties.find((property) => {
+				return property.propertyId = ctx.params.propertyId
+			})
+		} catch (e) {
+			ctx.response.status = 400
+			ctx.response.body = e.message
+		}
+	}, 
 
-            Dependency.mappedProperties.push(mappedProperty);
-            ctx.response.body = await Dependency.save();
-        } catch (e) {
-            ctx.response.status = 400;
-            ctx.response.body = e.message;
-        }
-    }, 
+	updateServiceDependency: async function(ctx) {
+		ctx.response.status = 501
+	},
 
-    getPropertyMapping: async function (ctx) {
-        const filter = {
-            _id: ctx.params.dependencyId
-        }
+	deleteServiceDependency: async function(ctx) {
+		ctx.response.status = 501
+	},
 
-        try {
-            const dependency = await ServiceDependency.findOne(filter);
-            ctx.response.body = dependency.mappedProperties.find((property) => {
-                return property.propertyId = ctx.params.propertyId
-            })
-        } catch (e) {
-            ctx.response.status = 400;
-            ctx.response.body = e.message;
-        }
-    }, 
+	updatePropertyMapping: async function(ctx) {
+		ctx.response.status = 501
+	}, 
 
-    updatePropertyMapping: async function (ctx) {
-        const filter = {
-            _id: ctx.params.dependencyId, 
-            propertyId: ctx.params.propertyId
-        }
-    }, 
-
-    deletePropertyMapping: async function (ctx) {
-        const filter = {
-            _id: ctx.params.dependencyId, 
-            propertyId: ctx.params.propertyId
-        }
-    }
+	deletePropertyMapping: async function(ctx) {
+		ctx.response.status = 501
+	}
 }
