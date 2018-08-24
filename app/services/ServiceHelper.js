@@ -81,8 +81,9 @@ export const ServiceHelper = (function() {
 
 			if(service) {
 				let newProperty = new PropertyModel(property)
-				newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
+				newProperty.path = newProperty.path + '.' + newProperty.propertyName
 
+				newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
 				service.properties.push(newProperty)
 
 				return await service.save()
@@ -101,7 +102,7 @@ export const ServiceHelper = (function() {
 
 				if(updatedProperty) {
 					updatedProperty.propertyName = property.propertyName
-					updatedProperty.path = property.path
+					updatedProperty.path = (property.path !== updatedProperty.path) ? property.path + '.' + property.propertyName : property.path
 					updatedProperty.propertyType = property.propertyType
 					updatedProperty.group = property.group
 					updatedProperty.mandatory = property.mandatory

@@ -7,7 +7,8 @@ var PropertySchema = new Schema({
 		type: String
 	},
 	path: {
-		type: String
+		type: String,
+		default: ''
 	},
 	propertyType: {
 		type: String,

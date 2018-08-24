@@ -82,7 +82,12 @@ export const ServiceMappingController = {
 	*/
 
 	deleteMappingDependency: async function (ctx) {
-		return ctx
+		try {
+			ctx.response.body = await MappingHelper.deleteMappingDependency(ctx.params.serviceId,ctx.params.mappingId,ctx.params.dependencyId)
+		} catch (e) {
+			ctx.status = e.statusCode || e.status || 500
+			ctx.app.emit('error', e, ctx)
+		}
 	},
 
 	getServiceMappingDetail: async function (ctx) {

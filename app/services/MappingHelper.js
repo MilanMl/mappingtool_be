@@ -109,7 +109,7 @@ export const MappingHelper = (function() {
 			let mapping = await this.getServiceMappingById(serviceId,mappingId)
 			if(mapping) {
 				let newDependency = new DependencyServiceModel(dependency)
-				newDependency.save(async (err) => {
+				await newDependency.save(async (err) => {
 					if(err) {
 						throw new Error('Error while creating dependency')
 					} else {
@@ -120,6 +120,21 @@ export const MappingHelper = (function() {
 				})
             
 				return ServiceMapping.populate(mapping, dependencyServicePopulate)
+			} else {
+				throw new Error('Mapping not found')
+			}
+		}, 
+
+		deleteMappingDependency: async function(serviceId,mappingId,dependencyId) {
+			let mapping = await this.getServiceMappingById(serviceId,mappingId)
+			
+			if(mapping) {
+				//DependencyServiceModel.deleteOne({_id: dependencyId})
+				mapping.dependencyServices = mapping.dependencyServices.filter((dependency) => {
+					return dependency._id != dependencyId
+				})
+
+				return await this.updateServiceMapping(mapping)
 			} else {
 				throw new Error('Mapping not found')
 			}
