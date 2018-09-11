@@ -6,7 +6,9 @@ import ENUMS from '../enums'
 
 var ServiceSchema = new Schema({
 	serviceName: {
-		type: String
+		type: String,
+		minlength: 5,
+		maxlength: 128
 	},
 	sourceSystem: { 
 		type: Schema.Types.ObjectId, 
@@ -21,8 +23,9 @@ var ServiceSchema = new Schema({
 	},
 	checked: Boolean,
 	checkedBy: String,
-	version: {
-		type: String
+	version: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'Version' 
 	},
 	userDefined: Boolean,
 	createdAt: Date,

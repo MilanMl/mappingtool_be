@@ -6,13 +6,24 @@ import {PropertyImportHelper} from './PropertyImportHelper'
 
 export const ServiceHelper = (function() {
 
+	const createPropertyPath = function(propertyName,path) {
+		const name = propertyName.replace(/ /g,'')
+		const currentPath = path.replace(/ /g,'')
+		return (currentPath) ? currentPath + '.' + name : name
+	}
+
+	const servicePopulate = {
+		path: 'version'
+	}
+
 	return {
 
 		addService: async function(service) {
 			let newService = new ServiceModel(service)
 			newService.createdAt = new Date()
 			newService.lastModifiedAt = new Date()
-			newService.active = true
+			newService.active = true,
+			newService.version = 1
 
 			return await newService.save()
 		},
@@ -23,9 +34,12 @@ export const ServiceHelper = (function() {
 			}
         
 			if(serviceName) {
+
+				const searchQuery = new RegExp('.*' + serviceName + '.*', 'i')
+
 				filter = {
 					serviceName: { 
-						$regex: '.*' + serviceName + '.*' 
+						$regex: searchQuery
 					} 
 				}
 			}
@@ -33,6 +47,7 @@ export const ServiceHelper = (function() {
 			let list = []
             
 			list = await ServiceModel.find(filter)
+				.populate(servicePopulate)
 				.skip((pageNumber - 1) * pageSize)
 				.limit(pageSize + 1)
 
@@ -46,6 +61,7 @@ export const ServiceHelper = (function() {
 			}
 
 			return await ServiceModel.findOne(filter)
+				.populate(servicePopulate)
 		}, 
 
 		updateService: async function(serviceId, service) {
@@ -81,9 +97,10 @@ export const ServiceHelper = (function() {
 
 			if(service) {
 				let newProperty = new PropertyModel(property)
-				newProperty.path = newProperty.path + '.' + newProperty.propertyName
-
+				newProperty.propertyName = property.propertyName.replace(/ /g,'')
+				newProperty.path = createPropertyPath(newProperty.propertyName, newProperty.path)
 				newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
+
 				service.properties.push(newProperty)
 
 				return await service.save()
@@ -100,9 +117,13 @@ export const ServiceHelper = (function() {
 
 				let updatedProperty = service.properties.id(propertyId)
 
+				if(updatedProperty === property) {
+					return service
+				}
+
 				if(updatedProperty) {
-					updatedProperty.propertyName = property.propertyName
-					updatedProperty.path = (property.path !== updatedProperty.path) ? property.path + '.' + property.propertyName : property.path
+					updatedProperty.propertyName = property.propertyName.replace(/ /g,'')
+					updatedProperty.path = (property.path !== updatedProperty.path) ? createPropertyPath(property.propertyName, property.path) : property.path
 					updatedProperty.propertyType = property.propertyType
 					updatedProperty.group = property.group
 					updatedProperty.mandatory = property.mandatory
@@ -127,8 +148,18 @@ export const ServiceHelper = (function() {
 				let removedProperty = service.properties.id(propertyId)
 
 				if(removedProperty) {
-					removedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
-					service.lastModifiedAt = new Date()
+
+					if(removedProperty.propertyType === 'object' || removedProperty.propertyType === 'array') {
+						for(let i = 1; i < service.properties.length; i++) {
+							if(service.properties[i].path.includes(removedProperty.path)) {
+								service.properties[i].currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
+								service.lastModifiedAt = new Date()
+							}
+						}
+					} else {
+						removedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
+						removedProperty.lastModifiedAt = new Date()
+					}
 				} else {
 					throw new Error('Property not found')
 				}
