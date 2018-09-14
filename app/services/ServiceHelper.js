@@ -3,6 +3,7 @@ import PropertyModel from '../models/PropertyModel'
 import CONSTANTS from '../config/constants'
 import ENUMS from '../enums'
 import {PropertyImportHelper} from './PropertyImportHelper'
+import {VersionHelper} from './VersionHelper'
 
 export const ServiceHelper = (function() {
 
@@ -22,8 +23,7 @@ export const ServiceHelper = (function() {
 			let newService = new ServiceModel(service)
 			newService.createdAt = new Date()
 			newService.lastModifiedAt = new Date()
-			newService.active = true,
-			newService.version = 1
+			newService.active = true
 
 			return await newService.save()
 		},
@@ -73,7 +73,16 @@ export const ServiceHelper = (function() {
 				editedService.serviceType = service.serviceType
 				editedService.lastModifiedAt = new Date()
 				editedService.properties = service.properties
-				return await editedService.save()
+				editedService.version = service.version
+
+				await editedService.save()
+
+				if(editedService.version !== service.version) {
+					editedService.version = await VersionHelper.getVersionById(service.version)
+				}
+
+				return editedService
+
 			} else {
 				throw new Error('Service not found')
 			}
