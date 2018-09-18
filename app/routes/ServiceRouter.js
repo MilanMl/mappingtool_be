@@ -14,6 +14,7 @@ router
 	.post('/:serviceId/properties/import', ServiceController.importProperties)
 	.get('/:serviceId/properties/:propertyId', ServiceController.getServicePropertyById)
 	.put('/:serviceId/properties/:propertyId', ServiceController.updateServiceProperty)
+	.put('/:serviceId/properties/:propertyId/unmark', ServiceController.unmarkPropertyChange)
 	.delete('/:serviceId/properties/:propertyId', ServiceController.deleteServiceProperty)
 
 export default router

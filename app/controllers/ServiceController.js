@@ -107,4 +107,14 @@ export const ServiceController = {
 			ctx.app.emit('error', e, ctx)
 		}
 	},
+
+	unmarkPropertyChange: async function (ctx) {
+
+		try {
+			ctx.response.body = await ServiceHelper.unmarkPropertyChange(ctx.params.serviceId,ctx.params.propertyId)
+		} catch (e) {
+			ctx.status = e.statusCode || e.status || 500
+			ctx.app.emit('error', e, ctx)
+		}
+	},
 }

@@ -2,15 +2,44 @@ import ServiceModel  from '../models/ServiceModel'
 import PropertyModel from '../models/PropertyModel'
 import CONSTANTS from '../config/constants'
 import ENUMS from '../enums'
-import {PropertyImportHelper} from './PropertyImportHelper'
+import {PropertyImport} from '../models/PropertyImport'
 import {VersionHelper} from './VersionHelper'
 
 export const ServiceHelper = (function() {
 
+	// vytvoreni novou cestu k property
 	const createPropertyPath = function(propertyName,path) {
 		const name = propertyName.replace(/ /g,'')
 		const currentPath = path.replace(/ /g,'')
 		return (currentPath) ? currentPath + '.' + name : name
+	}
+
+	// vrati prvni nasledujici index atributu v objektu / poli 
+	// napr - objekt nekde v properties ma dva parametry, funkce vrati poradi pro dalsi parametr = 3 
+	const getNextIndex = function(properties,currentProperty) {
+		const pathNestingCount = getNestingCount(currentProperty.path) + 1
+
+		const currentObjectProps = properties.filter((property) => {
+			return property.path.includes(currentProperty.path) && 
+				getNestingCount(property.path) === pathNestingCount && 
+				property.group === currentProperty.group
+		})
+
+		let lastIndex = properties.findIndex((property) => {
+			return (property._id === currentObjectProps[currentObjectProps.length - 1]._id)
+		})
+
+		return lastIndex + 1
+	}
+
+	// vrati pocet zanoreni dane cesty
+	const getNestingCount = function(path) {
+		return ( path.match( RegExp('\\.','g') ) || [] ).length
+	}
+
+	
+	const isComplexType = function(property) {
+		return (property.propertyType === 'object' || property.propertyType === 'array') ? true : false
 	}
 
 	const servicePopulate = {
@@ -64,137 +93,154 @@ export const ServiceHelper = (function() {
 				.populate(servicePopulate)
 		}, 
 
-		updateService: async function(serviceId, service) {
+		updateService: async function(serviceId, editedService) {
 
-			let editedService = await this.getServiceById(serviceId)
+			let service = await this.getServiceById(serviceId)
 
-			if(editedService) {
-				editedService.serviceName = service.serviceName
-				editedService.serviceType = service.serviceType
-				editedService.lastModifiedAt = new Date()
-				editedService.properties = service.properties
-				editedService.version = service.version
-
-				await editedService.save()
-
-				if(editedService.version !== service.version) {
-					editedService.version = await VersionHelper.getVersionById(service.version)
-				}
-
-				return editedService
-
-			} else {
+			if(!service) {
 				throw new Error('Service not found')
 			}
+
+			service.serviceName = editedService.serviceName
+			service.serviceType = editedService.serviceType
+			service.lastModifiedAt = new Date()
+			service.properties = editedService.properties
+			service.version = editedService.version
+
+			await service.save()
+
+			if(service.version !== editedService.version) {
+				service.version = await VersionHelper.getVersionById(editedService.version)
+			}
+
+			return service
 		}, 
 
 		deleteService: async function(serviceId) {
 
 			let service = await this.getServiceById(serviceId)
 
-			if(service) {
-				service.active = false
-				await service.save()
-			} else {
+			if(!service) {
 				throw new Error('Service not found')
 			}
+
+			service.active = false
+			await service.save()
 		}, 
 
 		addServiceProperty: async function(serviceId,property) {
     
 			let service = await this.getServiceById(serviceId)
 
-			if(service) {
-				let newProperty = new PropertyModel(property)
-				newProperty.propertyName = property.propertyName.replace(/ /g,'')
-				newProperty.path = createPropertyPath(newProperty.propertyName, newProperty.path)
-				newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
-
-				service.properties.push(newProperty)
-
-				return await service.save()
-			} else {
+			if(!service) {
 				throw new Error('Service not found')
 			}
+
+			let newProperty = new PropertyModel(property)
+			newProperty.propertyName = property.propertyName.replace(/ /g,'')
+			newProperty.path = createPropertyPath(newProperty.propertyName, newProperty.path)
+			newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
+
+			const propIndex = getNextIndex(service.properties, property)
+			service.properties.splice(propIndex,0,newProperty)
+
+			return await service.save()
 		}, 
 
 		updateServiceProperty: async function(serviceId, propertyId, property) {
 
 			let service = await this.getServiceById(serviceId)
 
-			if(service) {
-
-				let updatedProperty = service.properties.id(propertyId)
-
-				if(updatedProperty === property) {
-					return service
-				}
-
-				if(updatedProperty) {
-					updatedProperty.propertyName = property.propertyName.replace(/ /g,'')
-					updatedProperty.path = (property.path !== updatedProperty.path) ? createPropertyPath(property.propertyName, property.path) : property.path
-					updatedProperty.propertyType = property.propertyType
-					updatedProperty.group = property.group
-					updatedProperty.mandatory = property.mandatory
-					updatedProperty.description = property.description
-					updatedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.UPDATE
-				} else {
-					throw new Error('Property not found')
-				}
-
-				return await service.save()
-
-			} else {
+			if(!service) {
 				throw new Error('Service not found')
 			}
+
+			let updatedProperty = service.properties.id(propertyId)
+
+			if(!updatedProperty) {
+				throw new Error('Property not found')
+			}
+
+			if(updatedProperty === property) {
+				return service
+			}
+
+			// dodelat zmenu serazeni service.properties kdyz se zmeni umisteni 
+			updatedProperty.propertyName = property.propertyName.replace(/ /g,'')
+			updatedProperty.path = (property.path !== updatedProperty.path) ? createPropertyPath(property.propertyName, property.path) : property.path
+			updatedProperty.propertyType = property.propertyType
+			updatedProperty.group = property.group
+			updatedProperty.mandatory = property.mandatory
+			updatedProperty.description = property.description
+			updatedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.UPDATE
+
+			return await service.save()
 		},
 
 		deleteServiceProperty: async function(serviceId, propertyId) {
 			let service = await this.getServiceById(serviceId)
 
-			if(service) {
-
-				let removedProperty = service.properties.id(propertyId)
-
-				if(removedProperty) {
-
-					if(removedProperty.propertyType === 'object' || removedProperty.propertyType === 'array') {
-						for(let i = 1; i < service.properties.length; i++) {
-							if(service.properties[i].path.includes(removedProperty.path)) {
-								service.properties[i].currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
-								service.lastModifiedAt = new Date()
-							}
-						}
-					} else {
-						removedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
-						removedProperty.lastModifiedAt = new Date()
-					}
-				} else {
-					throw new Error('Property not found')
-				}
-
-				return await service.save()
-
-			} else {
+			if(!service) {
 				throw new Error('Service not found')
 			}
+
+			let removedProperty = service.properties.id(propertyId)
+
+			if(!removedProperty) {
+				throw new Error('Property not found')
+			}
+
+			// pokud je uz marknuta jako delete, pak odstranit z db, pokud ne, tak jen mark (currentChange)
+			if(removedProperty.currentChange !== ENUMS.PROPERTY_CHANGE_TYPES.DELETE) {
+				if(isComplexType(removedProperty)) {
+					for(let i = 1; i < service.properties.length; i++) {
+						if(service.properties[i].path.includes(removedProperty.path)) {
+							service.properties[i].currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
+						}
+					}
+				} else {
+					removedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
+				}
+			} else {
+				service.properties = service.properties.filter((property) => {
+					return !property.path.includes(removedProperty.path)
+				})
+			}
+
+			service.lastModifiedAt = new Date()
+
+			return await service.save()
 		},
 
 		importProperties: async function(serviceId,importObject) {
 			let service = await this.getServiceById(serviceId)
-    
-			if(service) {
-				if(service.properties.length === 0) {
-					let propertyImportHelper = new PropertyImportHelper(importObject.exampleObject,importObject.group)
-					service.properties = propertyImportHelper.createProperties()
-				} else {
-					throw new Error('Properties exists within current service')
-				}
 
-				return await service.save()
-			} else {
+			if(!service) {
 				throw new Error('Service not found')
 			}
+
+			let propertyImportHelper = new PropertyImport(importObject.exampleObject,importObject.group)
+			service.properties = service.properties.concat(propertyImportHelper.createProperties())
+
+			return await service.save()
+		}, 
+
+		unmarkPropertyChange: async function(serviceId,propertyId) {
+			let service = await this.getServiceById(serviceId)
+
+			if(!service) {
+				throw new Error('Service not found')
+			}
+
+			let updatedProperty = service.properties.id(propertyId)
+
+			if(!updatedProperty) {
+				throw new Error('Property not found')
+			}
+
+			updatedProperty.currentChange = null
+
+			return await service.save()
 		}
 	}
 })()

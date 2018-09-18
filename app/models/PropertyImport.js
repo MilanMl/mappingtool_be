@@ -1,6 +1,6 @@
-import PropertyModel from '../models/PropertyModel'
+import PropertyModel from './PropertyModel'
 
-export const PropertyImportHelper = function PropertyImportHelper(example, group) {
+export const PropertyImport = function PropertyImport(example, group) {
 
 	const OBJECT = 'object'
 	const ARRAY = 'array'
@@ -24,7 +24,7 @@ export const PropertyImportHelper = function PropertyImportHelper(example, group
 			properties.push(property)
 
 			if(property.propertyType === OBJECT) {
-				let props = parseObject(object[objectProperty],group, createPath(property.path,objectProperty))
+				let props = parseObject(object[objectProperty],group, createPath(path,objectProperty))
 				properties = properties.concat(props)
 			}
 
