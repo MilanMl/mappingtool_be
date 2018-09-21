@@ -13,6 +13,7 @@ export const PropertyImport = function PropertyImport(example, group) {
 
 	const parseObject = function(object,group, path = '') {
 		let properties = []
+
 		for(let objectProperty in object) {
 			let property = new PropertyModel()
 			property.propertyType = getPropertyType(object[objectProperty])
@@ -75,6 +76,13 @@ export const PropertyImport = function PropertyImport(example, group) {
 	}
 
 	this.createProperties = function() {
+
+		try {
+			JSON.parse(this.example)
+		} catch(e) {
+			throw new Error('Invalid imported JSON')
+		}
+
 		return parseObject(this.example, this.group)
 	}
 

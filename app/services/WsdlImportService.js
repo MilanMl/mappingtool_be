@@ -2,7 +2,7 @@ import convert from 'xml-js'
 import axios from 'axios'
 import { Application } from '../config/application'
 import CONSTANTS from '../../app/config/constants'
-import wsdlHelperService from './wsdlHelperService'
+import wsdlHelper from './WsdlHelper'
 import ENUMS from '../enums'
 import WsdlImportModel from '../models/importModels/WsdlImportModel'
 
@@ -80,12 +80,12 @@ export const ImportServices = (function() {
 					let rootXsd = await getFile(rootPath + rootXsdPath)
 
 					// get xsd types in rootXsd
-					let typesList = wsdlHelperService.getAllTypes(rootXsd)
+					let typesList = wsdlHelper.getAllTypes(rootXsd)
 
 					// extend types list for each imported xsd
 					typesList = await createXsdTypeList(rootXsd, typesList, rootPath, [])
 
-					const operationDetail = wsdlHelperService.findObjectByAttributeName(
+					const operationDetail = wsdlHelper.findObjectByAttributeName(
 						operationName,
 						wsdlJson.definitions.portType.operation
 					)
@@ -95,15 +95,15 @@ export const ImportServices = (function() {
 
 					if (operationDetail) {
 						// find request and response wsdl objects
-						let messageReq = wsdlHelperService.findObjectByAttributeName(
+						let messageReq = wsdlHelper.findObjectByAttributeName(
 							operationDetail.input._attributes.message,
 							wsdlJson.definitions.message
 						)
-						requestObject = wsdlHelperService.findObjectByAttributeName(
+						requestObject = wsdlHelper.findObjectByAttributeName(
 							messageReq.part._attributes.element,
 							rootXsd.schema.element
 						)
-						const reqProps = wsdlHelperService.getProperties(
+						const reqProps = wsdlHelper.getProperties(
 							requestObject,
 							typesList,
 							ENUMS.PROPERTY_GROUPS.REQUEST
@@ -113,15 +113,15 @@ export const ImportServices = (function() {
 						let messageRes
 						let resProps
 						if (operationDetail.output) {
-							messageRes = wsdlHelperService.findObjectByAttributeName(
+							messageRes = wsdlHelper.findObjectByAttributeName(
 								operationDetail.output._attributes.message,
 								wsdlJson.definitions.message
 							)
-							responseObject = wsdlHelperService.findObjectByAttributeName(
+							responseObject = wsdlHelper.findObjectByAttributeName(
 								messageRes.part._attributes.element,
 								rootXsd.schema.element
 							)
-							resProps = wsdlHelperService.getProperties(
+							resProps = wsdlHelper.getProperties(
 								responseObject,
 								typesList,
 								ENUMS.PROPERTY_GROUPS.RESPONSE
@@ -163,7 +163,7 @@ export const ImportServices = (function() {
 			let rootXsd = await getFile(rootPath + rootXsdPath)
 
 			// get xsd types in rootXsd
-			let typesList = wsdlHelperService.getAllTypes(rootXsd)
+			let typesList = wsdlHelper.getAllTypes(rootXsd)
 
 			// create all types list
 			typesList = await createXsdTypeList(rootXsd, typesList, rootPath, [])
@@ -179,15 +179,15 @@ export const ImportServices = (function() {
 			let serviceProperties = []
 			if (operation) {
 				// find request and response wsdl objects
-				let messageReq = wsdlHelperService.findObjectByAttributeName(
+				let messageReq = wsdlHelper.findObjectByAttributeName(
 					operation.input._attributes.message,
 					wsdlJson.definitions.message
 				)
-				requestObject = wsdlHelperService.findObjectByAttributeName(
+				requestObject = wsdlHelper.findObjectByAttributeName(
 					messageReq.part._attributes.element,
 					rootXsd.schema.element
 				)
-				const reqProps = wsdlHelperService.getProperties(
+				const reqProps = wsdlHelper.getProperties(
 					requestObject,
 					typesList,
 					ENUMS.PROPERTY_GROUPS.REQUEST
@@ -197,15 +197,15 @@ export const ImportServices = (function() {
 				let messageRes
 				let resProps
 				if (operation.output) {
-					messageRes = wsdlHelperService.findObjectByAttributeName(
+					messageRes = wsdlHelper.findObjectByAttributeName(
 						operation.output._attributes.message,
 						wsdlJson.definitions.message
 					)
-					responseObject = wsdlHelperService.findObjectByAttributeName(
+					responseObject = wsdlHelper.findObjectByAttributeName(
 						messageRes.part._attributes.element,
 						rootXsd.schema.element
 					)
-					resProps = wsdlHelperService.getProperties(
+					resProps = wsdlHelper.getProperties(
 						responseObject,
 						typesList,
 						ENUMS.PROPERTY_GROUPS.RESPONSE
@@ -240,7 +240,7 @@ export const ImportServices = (function() {
 			const wsdlPath = getWsdlPath(wsdlName)
 			let wsdlJson = await getFile(wsdlPath)
 
-			return wsdlHelperService.findObjectByAttributeName(
+			return wsdlHelper.findObjectByAttributeName(
 				operationName,
 				wsdlJson.definitions.portType.operation
 			)
@@ -324,7 +324,7 @@ async function createXsdTypeList(
 			)
 			schemaLocations.push(xsd.schema.import[i]._attributes.schemaLocation)
 			const loadedXsd = await getFile(rootPath + path)
-			const importedTypeList = wsdlHelperService.getAllTypes(loadedXsd)
+			const importedTypeList = wsdlHelper.getAllTypes(loadedXsd)
 			currentTypeList = currentTypeList.concat(importedTypeList)
 
 			currentTypeList = await createXsdTypeList(

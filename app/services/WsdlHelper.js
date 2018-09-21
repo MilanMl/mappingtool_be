@@ -1,7 +1,7 @@
 import ENUMS from '../enums'
 
 
-export const wsdlHelperService = (function () {
+export const wsdlHelper = (function () {
 	return {
 		getXsdTypeInfo: function (xsdObject) {
 			const position = xsdObject._attributes.type.indexOf(':')

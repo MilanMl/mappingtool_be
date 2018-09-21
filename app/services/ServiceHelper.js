@@ -214,7 +214,6 @@ export const ServiceHelper = (function() {
 
 		importProperties: async function(serviceId,importObject) {
 			let service = await this.getServiceById(serviceId)
-
 			if(!service) {
 				throw new Error('Service not found')
 			}
