@@ -25,16 +25,30 @@ export const ServiceHelper = (function() {
 				property.group === currentProperty.group
 		})
 
-		let lastIndex = properties.findIndex((property) => {
-			return (property._id === currentObjectProps[currentObjectProps.length - 1]._id)
-		})
+		let lastIndex
+		// pokud je vybrana cesta
+		if(currentProperty.path) {
+			// existuje alespon jeden potomek dane cesty - hledej index posledniho potomka 
+			if(currentObjectProps.length > 0) {
+				lastIndex = properties.findIndex((property) => {
+					return (property._id === currentObjectProps[currentObjectProps.length - 1]._id)
+				})
+			} else {
+				// neni-li zadny potomek dane cesty, pak jde o prvni nasledujici index v danem objektu 
+				lastIndex = properties.findIndex((property) => {
+					return ((property.path === currentProperty.path) && (property.group === currentProperty.group))
+				})
+			}
+		} else {
+			lastIndex = properties.length
+		}
 
 		return lastIndex + 1
 	}
 
 	// vrati pocet zanoreni dane cesty
 	const getNestingCount = function(path) {
-		return ( path.match( RegExp('\\.','g') ) || [] ).length
+		return (path) ? ( path.match( RegExp('\\.','g') ) || [] ).length : 0
 	}
 
 	
@@ -142,7 +156,8 @@ export const ServiceHelper = (function() {
 			newProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.NEW
 
 			const propIndex = getNextIndex(service.properties, property)
-			service.properties.splice(propIndex,0,newProperty)
+			console.log(propIndex)
+			service.properties.splice(propIndex, 0, newProperty)
 
 			return await service.save()
 		}, 
@@ -165,16 +180,48 @@ export const ServiceHelper = (function() {
 				return service
 			}
 
+			// dodelat 
+			let path = property.path
+			if(property.path !== updatedProperty.path) {
+				path = createPropertyPath(property.propertyName, property.path)
+				let propIndex = getNextIndex(service.properties, property)
+				let nestedProperties = []
+	
+				if(isComplexType(property)) {
+					nestedProperties = service.properties.filter((nestedProperty) => {
+						if(nestedProperty.path.includes(updatedProperty.path) && property.group === nestedProperty.group) {
+							return nestedProperty
+						}
+					})
+				} else {
+					nestedProperties.push(updatedProperty)
+				}
+	
+				for(var i=0; i<nestedProperties.length;i++) {
+					nestedProperties[i].path = nestedProperties[i].path.replace(updatedProperty.path,path)
+					service.properties.splice(propIndex, 0, nestedProperties[i])
+					propIndex++
+				}
+
+				console.log(updatedProperty.path)
+				service.properties = service.properties.filter((currentProperty) => {
+					if(!currentProperty.path.includes(updatedProperty.path) && property.group === currentProperty.group) {
+						return currentProperty
+					}
+				})
+			} 
+
 			// dodelat zmenu serazeni service.properties kdyz se zmeni umisteni 
 			updatedProperty.propertyName = property.propertyName.replace(/ /g,'')
-			updatedProperty.path = (property.path !== updatedProperty.path) ? createPropertyPath(property.propertyName, property.path) : property.path
+			//	updatedProperty.path = path
 			updatedProperty.propertyType = property.propertyType
 			updatedProperty.group = property.group
 			updatedProperty.mandatory = property.mandatory
 			updatedProperty.description = property.description
 			updatedProperty.currentChange = ENUMS.PROPERTY_CHANGE_TYPES.UPDATE
 
-			return await service.save()
+			return service
+		//	return await service.save()
 		},
 
 		deleteServiceProperty: async function(serviceId, propertyId) {
@@ -193,7 +240,7 @@ export const ServiceHelper = (function() {
 			// pokud je uz marknuta jako delete, pak odstranit z db, pokud ne, tak jen mark (currentChange)
 			if(removedProperty.currentChange !== ENUMS.PROPERTY_CHANGE_TYPES.DELETE) {
 				if(isComplexType(removedProperty)) {
-					for(let i = 1; i < service.properties.length; i++) {
+					for(var i = 0; i < service.properties.length; i++) {
 						if(service.properties[i].path.includes(removedProperty.path)) {
 							service.properties[i].currentChange = ENUMS.PROPERTY_CHANGE_TYPES.DELETE
 						}
